@@ -1,0 +1,36 @@
+name: iOS CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+
+    - name: Install Fastlane
+      run: gem install fastlane -NV
+
+    - name: Install Firebase CLI
+      run: curl -sL https://firebase.tools | bash
+
+    - name: Install Dependencies
+      run: bundle install
+      working-directory: fastlane
+
+    - name: Run Fastlane Beta Deployment
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: fastlane beta
+
