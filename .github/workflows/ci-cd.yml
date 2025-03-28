@@ -27,7 +27,6 @@ jobs:
 
     - name: Install CocoaPods Dependencies
       run: pod install
-      working-directory: ios  # Adjust if your Podfile is in a different location
 
     - name: Run Fastlane Beta Deployment
       env:
