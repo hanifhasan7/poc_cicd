@@ -23,6 +23,7 @@ platform :ios do
     )
 
     build_app(
+      workspace: "poc_cicd.xcworkspace",
       scheme: "poc_cicd",
       export_method: "ad-hoc",
       output_directory: "./build",
