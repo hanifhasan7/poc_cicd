@@ -19,19 +19,20 @@ platform :ios do
   desc "Build and distribute to Firebase App Distribution"
   lane :beta do
     increment_build_number(
-      xcodeproj: "poc_cicd.xcodeproj"
+      xcodeproj: "poc_cicd.xcodeproj" # Keep this if you still want to increment the build number in the .xcodeproj
     )
 
     build_app(
-      workspace: "poc_cicd.xcworkspace",
+      workspace: "poc_cicd.xcworkspace", # Specify the workspace instead of xcodeproj
       scheme: "poc_cicd",
       export_method: "ad-hoc",
       output_directory: "./build",
       output_name: "poc_cicd.ipa"
     )
 
+
     firebase_app_distribution(
-      app: "poc-cicd-35e11",
+      app: "1:744326726756:ios:3266a11af29a669ada8b71",
       testers: "hanifhasan91@gmail.com",
       release_notes: "New Beta Version",
       firebase_cli_token: ENV["FIREBASE_TOKEN"]
