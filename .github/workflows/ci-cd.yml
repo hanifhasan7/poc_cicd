@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop
+      
 
 jobs:
   build:
@@ -25,12 +25,11 @@ jobs:
     - name: Install Firebase CLI
       run: curl -sL https://firebase.tools | bash
 
-    - name: Install Dependencies
-      run: bundle install
-      working-directory: fastlane
+    - name: Install CocoaPods Dependencies
+      run: pod install
+      working-directory: ios  # Adjust if your Podfile is in a different location
 
     - name: Run Fastlane Beta Deployment
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: fastlane beta
-
